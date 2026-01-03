@@ -78,12 +78,13 @@ public class Network {
         for( int i=0; i<userCount; i++)
         {
             User candidate = users[i];
-            if(candidate.getName()!= name && toFollow.follows(candidate.getName())!= true)
+            if (!candidate.getName().equals(name) && !toFollow.follows(candidate.getName()))
             {
-                if(toFollow.countMutual(candidate)>max)
+                int mutuals = toFollow.countMutual(candidate);
+                if(mutuals>max)
                 {
                     best= users[i];
-                    max= toFollow.countMutual(candidate);
+                    max= mutuals;
                 }
 
             }

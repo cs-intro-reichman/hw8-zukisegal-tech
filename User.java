@@ -72,9 +72,9 @@
         for(int i=0; i<fCount; i++)
         {
             if (follows[i].equalsIgnoreCase(name))
-                for(int j=i; j<follows.length; j++)
+                for(int j=i; j<fCount - 1; j++)
                     follows[j]=follows[j+1];
-            follows[fCount]=null;
+            follows[fCount-1]=null;
             fCount--;
             return true;
         }
@@ -85,6 +85,8 @@
     /** Counts the number of users that both this user and the other user follow.
     /*  Notice: This is the size of the intersection of the two follows lists. */
     public int countMutual(User other) {
+        if (other == null) 
+            return 0;
         int count=0;
         for(int i=0; i<this.fCount; i++)
         {
