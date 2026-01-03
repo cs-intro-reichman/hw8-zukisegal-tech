@@ -47,7 +47,7 @@ public class Network {
           return false;
         if(userCount==users.length)
             return false;
-        users[userCount]= new User(name)
+        users[userCount]= new User(name);
         userCount++;
         return true;
 
