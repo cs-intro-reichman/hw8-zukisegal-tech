@@ -102,11 +102,10 @@
             return false;
         }
         
-       if (this.follows(other.getName()) && other.follows(this.getName())) 
-        {
-            return true;
-        }
-         return false;
+        boolean thisFollowsOther = this.follows(other.getName());
+        boolean otherFollowsThis = other.follows(this.getName());
+        
+        return thisFollowsOther && otherFollowsThis;
     }
     /** Returns this user's name, and the names that s/he follows. */
     public String toString() {
