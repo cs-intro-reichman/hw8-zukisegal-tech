@@ -67,9 +67,11 @@
     /** Removes the given name from the follows list of this user. If successful, returns true.
      *  If the name is not in the list, does nothing and returns false. */
     public boolean removeFollowee(String name) {
-        for(int i=0; i<follows.length; i++)
+        if (name == null) 
+            return false;
+        for(int i=0; i<fCount; i++)
         {
-            if(follows[i]==name)
+            if (follows[i].equalsIgnoreCase(name))
                 for(int j=i; j<follows.length; j++)
                     follows[j]=follows[j+1];
             follows[fCount]=null;
@@ -94,11 +96,12 @@
 
     /** Checks is this user is a friend of the other user.
      *  (if two users follow each other, they are said to be "friends.") */
-    public boolean isFriendOf(User other) {
-        if(this.follows(other.name)&& other.follows(this.name))
-            return true;
-        return false;
-    }
+    public boolean isFriendOf(User other) 
+    {
+        if (other == null) return false;
+             return other.follows(this.name);
+    }   
+    
     /** Returns this user's name, and the names that s/he follows. */
     public String toString() {
         String ans = name + " -> ";
