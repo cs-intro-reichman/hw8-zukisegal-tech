@@ -45,7 +45,7 @@
     public boolean follows(String name) {
         for(int i=0; i<follows.length; i++)
         {
-            if(follows[i]==name)
+            if (follows[i].equalsIgnoreCase(name))
                 return true;
         }
         return false;
@@ -85,15 +85,15 @@
     /** Counts the number of users that both this user and the other user follow.
     /*  Notice: This is the size of the intersection of the two follows lists. */
     public int countMutual(User other) {
-        int count = 0;
-       
-        for (int i = 0; i < this.fCount; i++) {
-            if (other.follows(this.follows[i])) {
-                count++;
-            }
+    int count = 0;
+    for (int i = 0; i < this.fCount; i++) {
+        String currentFollowed = this.follows[i];
+        if (other.follows(currentFollowed)) {
+            count++;
         }
-        return count;
     }
+    return count;
+}
 
     /** Checks is this user is a friend of the other user.
      *  (if two users follow each other, they are said to be "friends.") */
@@ -102,10 +102,11 @@
             return false;
         }
         
-        boolean thisFollowsOther = this.follows(other.getName());
-        boolean otherFollowsThis = other.follows(this.getName());
-        
-        return thisFollowsOther && otherFollowsThis;
+       if (this.follows(other.getName()) && other.follows(this.getName())) 
+        {
+            return true;
+        }
+         return false;
     }
     /** Returns this user's name, and the names that s/he follows. */
     public String toString() {
